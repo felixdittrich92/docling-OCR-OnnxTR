@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "docling-ocr-onnxtr"
-description = "Onnx Text Recognition (OnnxTR) plugin for docling"
+description = "Onnx Text Recognition (OnnxTR) OCR plugin for docling"
 authors = [{name = "Felix Dittrich", email = "felixdittrich92@gmail.com"}]
 maintainers = [
     {name = "Felix Dittrich"},
