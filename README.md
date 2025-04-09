@@ -22,36 +22,23 @@ The `docling-OCR-OnnxTR` repository provides a plugin that integrates the OnnxTR
 
 **Installation:**
 
-To install the plugin, use one of the following commands based on your hardware:
-
-- For CPU:
+To install the plugin, use one of the following commands based on your hardware:
 
 ```bash
+# For CPU
 pip install docling-ocr-onnxtr[cpu]
-```
-
-- For Nvidia GPU:
-
-```bash
+# For Nvidia GPU
 pip install docling-ocr-onnxtr[gpu]
-```
-
-- For Intel GPU / Integrated Graphics:
-
-```bash
+# For Intel GPU / Integrated Graphics
 pip install docling-ocr-onnxtr[openvino]
-```
 
-- For CPU without GUI:
-
-```bash
+# Headless mode (no GUI)
+# For CPU
 pip install docling-ocr-onnxtr[cpu-headless]
-```
-
-- For Nvidia GPU without GUI:
-
-```bash
+# For Nvidia GPU
 pip install docling-ocr-onnxtr[gpu-headless]
+# For Intel GPU / Integrated Graphics
+pip install docling-ocr-onnxtr[openvino-headless]
 ```
 
 By integrating OnnxTR with Docling, users can achieve more efficient and accurate OCR results, enhancing the overall document processing experience.
