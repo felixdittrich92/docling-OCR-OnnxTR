@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/felixdittrich92/docling-OCR-OnnxTR/graph/badge.svg?token=L3AHXKV86A)](https://codecov.io/gh/felixdittrich92/docling-OCR-OnnxTR)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/0d250447650240ee9ca573950fea8b99)](https://app.codacy.com/gh/felixdittrich92/docling-OCR-OnnxTR/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/felixdittrich92/docling-ocr-onnxtr/badge)](https://www.codefactor.io/repository/github/felixdittrich92/docling-ocr-onnxtr)
-[![Pypi](https://img.shields.io/badge/pypi-v0.1.1-blue.svg)](https://pypi.org/project//)
+[![Pypi](https://img.shields.io/badge/pypi-v0.1.2-blue.svg)](https://pypi.org/project//)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/docling-ocr-onnxtr)
 
 The `docling-OCR-OnnxTR` repository provides a plugin that integrates the [OnnxTR OCR engine](https://github.com/felixdittrich92/OnnxTR) into the [Docling framework](https://github.com/docling-project/docling), enhancing document processing capabilities with efficient and accurate text recognition.
