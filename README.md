@@ -24,6 +24,10 @@ The `docling-OCR-OnnxTR` repository provides a plugin that integrates the [OnnxT
 
 To install the plugin, use one of the following commands based on your hardware:
 
+For GPU support please take a look at: [ONNX Runtime](https://onnxruntime.ai/getting-started).
+
+- **Prerequisites:** CUDA & cuDNN needs to be installed before [Version table](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html).
+
 ```bash
 # For CPU
 pip install docling-ocr-onnxtr[cpu]

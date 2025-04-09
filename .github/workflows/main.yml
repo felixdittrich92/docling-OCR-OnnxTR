@@ -14,7 +14,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python: ["3.10", "3.11", "3.12"]
         backend: ["cpu-headless", openvino-headless]
     steps:
@@ -22,7 +22,8 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python }}
+          # MacOS issue ref.: https://github.com/actions/setup-python/issues/855 & https://github.com/actions/setup-python/issues/865
+          python-version: ${{ matrix.os == 'macos-latest' && matrix.python == '3.10' && '3.11' || matrix.python }}
           architecture: x64
       - name: Cache python modules
         uses: actions/cache@v4
@@ -36,11 +37,11 @@ jobs:
       - name: Run unittests
         run: |
           make test
-          coverage xml -o coverage-common-${{ matrix.backend }}-${{ matrix.python }}.xml
+          coverage xml -o coverage-common-${{ matrix.backend }}-${{ matrix.python }}-${{ matrix.os }}.xml
       - uses: actions/upload-artifact@v4
         with:
-          name: coverage-common-${{ matrix.backend }}-${{ matrix.python }}
-          path: ./coverage-common-${{ matrix.backend }}-${{ matrix.python }}.xml
+          name: coverage-common-${{ matrix.backend }}-${{ matrix.python }}-${{ matrix.os }}
+          path: ./coverage-common-${{ matrix.backend }}-${{ matrix.python }}-${{ matrix.os }}.xml
           if-no-files-found: error
 
   codecov-upload:
