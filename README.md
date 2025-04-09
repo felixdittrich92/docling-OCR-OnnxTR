@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/felixdittrich92/OnnxTR/raw/main/docs/images/onnxtr_docling_merged.png" width="40%">
+  <img src="https://github.com/felixdittrich92/docling-OCR-OnnxTR/raw/main/docs/images/onnxtr_docling_merged.png" width="40%">
 </p>
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
