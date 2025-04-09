@@ -30,19 +30,19 @@ For GPU support please take a look at: [ONNX Runtime](https://onnxruntime.ai/get
 
 ```bash
 # For CPU
-pip install docling-ocr-onnxtr[cpu]
+pip install "docling-ocr-onnxtr[cpu]"
 # For Nvidia GPU
-pip install docling-ocr-onnxtr[gpu]
+pip install "docling-ocr-onnxtr[gpu]"
 # For Intel GPU / Integrated Graphics
-pip install docling-ocr-onnxtr[openvino]
+pip install "docling-ocr-onnxtr[openvino]"
 
 # Headless mode (no GUI)
 # For CPU
-pip install docling-ocr-onnxtr[cpu-headless]
+pip install "docling-ocr-onnxtr[cpu-headless]"
 # For Nvidia GPU
-pip install docling-ocr-onnxtr[gpu-headless]
+pip install "docling-ocr-onnxtr[gpu-headless]"
 # For Intel GPU / Integrated Graphics
-pip install docling-ocr-onnxtr[openvino-headless]
+pip install "docling-ocr-onnxtr[openvino-headless]"
 ```
 
 By integrating OnnxTR with Docling, users can achieve more efficient and accurate OCR results, enhancing the overall document processing experience.
