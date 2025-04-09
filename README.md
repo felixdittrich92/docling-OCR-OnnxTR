@@ -3,7 +3,7 @@
 </p>
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Test Status](https://github.com/felixdittrich92/docling-OCR-OnnxTR/actions/workflows/main.yml/badge.svg)](https://github.com/felixdittrich92/docling-OCR-OnnxTR/actions/workflows/main.yml)
+[![Build Status](https://github.com/felixdittrich92/docling-OCR-OnnxTR/actions/workflows/builds.yml/badge.svg)](https://github.com/felixdittrich92/docling-OCR-OnnxTR/actions/workflows/builds.yml)
 [![codecov](https://codecov.io/gh/felixdittrich92/docling-OCR-OnnxTR/graph/badge.svg?token=L3AHXKV86A)](https://codecov.io/gh/felixdittrich92/docling-OCR-OnnxTR)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/0d250447650240ee9ca573950fea8b99)](https://app.codacy.com/gh/felixdittrich92/docling-OCR-OnnxTR/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/felixdittrich92/docling-ocr-onnxtr/badge)](https://www.codefactor.io/repository/github/felixdittrich92/docling-ocr-onnxtr)
