@@ -4,26 +4,57 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Test Status](https://github.com/felixdittrich92/docling-OCR-OnnxTR/actions/workflows/main.yml/badge.svg)](https://github.com/felixdittrich92/docling-OCR-OnnxTR/actions/workflows/main.yml)
-[![codecov](https://codecov.io/gh/felixdittrich92/OnnxTR/graph/badge.svg?token=WVFRCQBOLI)](https://codecov.io/gh/felixdittrich92/OnnxTR)
+[![codecov](https://codecov.io/gh/felixdittrich92/docling-OCR-OnnxTR/graph/badge.svg?token=L3AHXKV86A)](https://codecov.io/gh/felixdittrich92/docling-OCR-OnnxTR)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/0d250447650240ee9ca573950fea8b99)](https://app.codacy.com/gh/felixdittrich92/docling-OCR-OnnxTR/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/felixdittrich92/docling-ocr-onnxtr/badge)](https://www.codefactor.io/repository/github/felixdittrich92/docling-ocr-onnxtr)
 [![Pypi](https://img.shields.io/badge/pypi-v0.6.2-blue.svg)](https://pypi.org/project//)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/docling-ocr-onnxtr)
 
-# docling-OCR-OnnxTR
+The `docling-OCR-OnnxTR` repository provides a plugin that integrates the OnnxTR OCR engine into the Docling framework, enhancing document processing capabilities with efficient and accurate text recognition.
 
-docling plugin for OnnxTR OCR
+**Key Features:**
 
-## Installation
+- **Seamless Integration:** Easily incorporate OnnxTR's OCR functionalities into your Docling workflows for improved document parsing and analysis.
+
+- **Optimized Performance:** Leverages OnnxTR's lightweight architecture to deliver faster inference times and reduced resource consumption compared to traditional OCR engines.
+
+- **Flexible Deployment:** Supports various hardware configurations, including CPU, GPU, and OpenVINO, allowing you to choose the best setup for your needs.
+
+**Installation:**
+
+To install the plugin, use one of the following commands based on your hardware:
+
+- For CPU:
 
 ```bash
-pip install docling-ocr-onnxtr[cpu] # for CPU
-pip install docling-ocr-onnxtr[gpu] # for Nvidia GPU
-pip install docling-ocr-onnxtr[openvino] # for Intel GPU / Integrated Graphics
-pip install docling-ocr-onnxtr[cpu-headless] # for CPU without GUI
-pip install docling-ocr-onnxtr[gpu-headless] # for Nvidia GPU without GUI
-pip install docling-ocr-onnxtr[openvino-headless] # for Intel GPU / Integrated Graphics without GUI
+pip install docling-ocr-onnxtr[cpu]
 ```
+
+- For Nvidia GPU:
+
+```bash
+pip install docling-ocr-onnxtr[gpu]
+```
+
+- For Intel GPU / Integrated Graphics:
+
+```bash
+pip install docling-ocr-onnxtr[openvino]
+```
+
+- For CPU without GUI:
+
+```bash
+pip install docling-ocr-onnxtr[cpu-headless]
+```
+
+- For Nvidia GPU without GUI:
+
+```bash
+pip install docling-ocr-onnxtr[gpu-headless]
+```
+
+By integrating OnnxTR with Docling, users can achieve more efficient and accurate OCR results, enhancing the overall document processing experience.
 
 ## Usage
 
@@ -79,6 +110,44 @@ def main():
 
 if __name__ == "__main__":
     main()
+```
+
+## Configuration
+
+The configuration of the OCR engine is done via the `OnnxtrOcrOptions` class. The following options are available:
+
+- `lang`: List of languages to use for OCR. Default is `["en", "fr"]`.
+- `confidence_score`: Word confidence threshold for the recognition model. Default is `0.5`.
+- `objectness_score`: Detection model objectness score threshold. Default is `0.3`.
+- `det_arch`: Detection model architecture. Default is `"fast_base"`.
+- `reco_arch`: Recognition model architecture. Default is `"crnn_vgg16_bn"`.
+- `reco_bs`: Batch size for the recognition model. Default is `512`.
+- `auto_correct_orientation`: Whether to auto-correct the orientation of the pages. Default is `False`.
+- `preserve_aspect_ratio`: Whether to preserve the aspect ratio of the images. Default is `True`.
+- `symmetric_pad`: Whether to use symmetric padding. Default is `True`.
+- `paragraph_break`: Paragraph break threshold. Default is `0.035`.
+- `load_in_8_bit`: Whether to load the model in 8-bit. Default is `False`.
+- `providers`: List of providers to use for the Onnxruntime. Default is `None` which means auto-select.
+- `session_options`: Session options for the Onnxruntime. Default is `None` which means default OnnxTR session options.
+
+Available Hugging Face models can be found at [Hugging Face](https://huggingface.co/collections/Felix92/onnxtr-66bf213a9f88f7346c90e842).
+
+**Further information:**
+
+Please take a look at [OnnxTR](https://github.com/felixdittrich92/OnnxTR).
+
+## Contributing
+
+Contributions are welcome!
+
+Before opening a pull request, please ensure that your code passes the tests and adheres to the project's coding standards.
+
+You can run the tests and checks using:
+
+```bash
+make style
+make quality
+make test
 ```
 
 ## License
