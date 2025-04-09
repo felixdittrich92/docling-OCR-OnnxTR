@@ -31,8 +31,7 @@ classifiers=[
 dynamic = ["version"]
 dependencies = [
     "pydantic",
-    "onnxtr",
-    "docling",
+    "docling>=2.27.0,<3.0.0",
 ]
 
 [project.entry-points."docling"]
@@ -40,22 +39,22 @@ docling_ocr_onnxtr = "docling_ocr_onnxtr.plugin"
 
 [project.optional-dependencies]
 cpu = [
-    "onnxtr[cpu]",
+    "onnxtr[cpu]>=0.6.2,<1.0.0",
 ]
 gpu = [
-    "onnxtr[gpu]",
+    "onnxtr[gpu]>=0.6.2,<1.0.0",
 ]
 openvino = [
-    "onnxtr[openvino]",
+    "onnxtr[openvino]>=0.6.2,<1.0.0",
 ]
 cpu-headless = [
-    "onnxtr[cpu-headless]",
+    "onnxtr[cpu-headless]>=0.6.2,<1.0.0",
 ]
 gpu-headless = [
-    "onnxtr[gpu-headless]",
+    "onnxtr[gpu-headless]>=0.6.2,<1.0.0",
 ]
 openvino-headless = [
-    "onnxtr[openvino-headless]",
+    "onnxtr[openvino-headless]>=0.6.2,<1.0.0",
 ]
 testing = [
     "pytest>=5.3.2",
