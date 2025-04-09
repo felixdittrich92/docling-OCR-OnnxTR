@@ -3,10 +3,10 @@
 </p>
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-![Test Status](https://github.com/felixdittrich92/onnxtr/workflows/main/badge.svg)
+[![Test Status](https://github.com/felixdittrich92/docling-OCR-OnnxTR/actions/workflows/main.yml/badge.svg)](https://github.com/felixdittrich92/docling-OCR-OnnxTR/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/felixdittrich92/OnnxTR/graph/badge.svg?token=WVFRCQBOLI)](https://codecov.io/gh/felixdittrich92/OnnxTR)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4fff4d764bb14fb8b4f4afeb9587231b)](https://app.codacy.com/gh/felixdittrich92/OnnxTR/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-[![CodeFactor](https://www.codefactor.io/repository/github/felixdittrich92/onnxtr/badge)](https://www.codefactor.io/repository/github/felixdittrich92/onnxtr)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/0d250447650240ee9ca573950fea8b99)](https://app.codacy.com/gh/felixdittrich92/docling-OCR-OnnxTR/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![CodeFactor](https://www.codefactor.io/repository/github/felixdittrich92/docling-ocr-onnxtr/badge)](https://www.codefactor.io/repository/github/felixdittrich92/docling-ocr-onnxtr)
 [![Pypi](https://img.shields.io/badge/pypi-v0.6.2-blue.svg)](https://pypi.org/project//)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/docling-ocr-onnxtr)
 
