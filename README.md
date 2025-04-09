@@ -10,7 +10,7 @@
 [![Pypi](https://img.shields.io/badge/pypi-v0.6.2-blue.svg)](https://pypi.org/project//)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/docling-ocr-onnxtr)
 
-The `docling-OCR-OnnxTR` repository provides a plugin that integrates the OnnxTR OCR engine into the Docling framework, enhancing document processing capabilities with efficient and accurate text recognition.
+The `docling-OCR-OnnxTR` repository provides a plugin that integrates the [OnnxTR OCR engine](https://github.com/felixdittrich92/OnnxTR) into the [Docling framework](https://github.com/docling-project/docling), enhancing document processing capabilities with efficient and accurate text recognition.
 
 **Key Features:**
 
@@ -113,7 +113,7 @@ The configuration of the OCR engine is done via the `OnnxtrOcrOptions` class. Th
 - `preserve_aspect_ratio`: Whether to preserve the aspect ratio of the images. Default is `True`.
 - `symmetric_pad`: Whether to use symmetric padding. Default is `True`.
 - `paragraph_break`: Paragraph break threshold. Default is `0.035`.
-- `load_in_8_bit`: Whether to load the model in 8-bit. Default is `False`.
+- `load_in_8_bit`: Whether to load the model in 8-bit. Default is `False`. (Not supported for Hugging Face loaded models yet)
 - `providers`: List of providers to use for the Onnxruntime. Default is `None` which means auto-select.
 - `session_options`: Session options for the Onnxruntime. Default is `None` which means default OnnxTR session options.
 
