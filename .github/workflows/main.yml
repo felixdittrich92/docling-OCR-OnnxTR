@@ -16,7 +16,12 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python: ["3.10", "3.11", "3.12"]
-        backend: ["cpu-headless", openvino-headless]
+        backend:
+          - cpu-headless
+          - openvino-headless
+        exclude:
+          - os: macos-latest
+            backend: openvino-headless
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
