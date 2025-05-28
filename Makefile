@@ -22,7 +22,7 @@ test:
 	git clone --filter=blob:none --no-checkout https://github.com/docling-project/docling.git temp_repo
 	cd temp_repo && git sparse-checkout init --cone
 	cd temp_repo && git sparse-checkout set tests/data_scanned
-	cd temp_repo && git checkout main  # <-- This is the missing piece
+	cd temp_repo && git checkout main
 	mkdir -p tests/data_scanned
 	cp -r temp_repo/tests/data_scanned/* tests/data_scanned/
 	rm -rf temp_repo
