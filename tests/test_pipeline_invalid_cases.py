@@ -72,6 +72,7 @@ def test_call_skips_zero_area_rects(mock_engine_config, mock_from_hub, mock_ocr_
     mock_page.image = MagicMock()
     mock_page.page_idx = 0
     mock_page.rotation = 0
+    mock_page.parsed_page = MagicMock()
 
     conv_res = MagicMock(spec=ConversionResult)
 
