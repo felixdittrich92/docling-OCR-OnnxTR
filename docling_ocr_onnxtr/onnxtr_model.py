@@ -12,7 +12,7 @@ import numpy
 import numpy as np
 from docling.datamodel.base_models import Page
 from docling.datamodel.document import ConversionResult
-from docling.datamodel.pipeline_options import (
+from docling.datamodel.pipeline_options import (  # type: ignore[attr-defined]
     AcceleratorOptions,
     OcrOptions,
 )
