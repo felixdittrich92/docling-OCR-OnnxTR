@@ -91,11 +91,13 @@ class OnnxtrOcrModel(BaseOcrModel):
 
             self.reader = ocr_predictor(
                 det_arch=(
-                    from_hub(self.options.det_arch) if self.options.det_arch.count("/") == 1 else self.options.det_arch
+                    from_hub(self.options.det_arch)
+                    if isinstance(self.options.det_arch, str) and self.options.det_arch.count("/") == 1
+                    else self.options.det_arch
                 ),
                 reco_arch=(
                     from_hub(self.options.reco_arch)
-                    if self.options.reco_arch.count("/") == 1
+                    if isinstance(self.options.reco_arch, str) and self.options.reco_arch.count("/") == 1
                     else self.options.reco_arch
                 ),
                 det_bs=1,  # NOTE: Should be always 1, because docling handles batching

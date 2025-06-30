@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/felixdittrich92/docling-OCR-OnnxTR/graph/badge.svg?token=L3AHXKV86A)](https://codecov.io/gh/felixdittrich92/docling-OCR-OnnxTR)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/0d250447650240ee9ca573950fea8b99)](https://app.codacy.com/gh/felixdittrich92/docling-OCR-OnnxTR/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/felixdittrich92/docling-ocr-onnxtr/badge)](https://www.codefactor.io/repository/github/felixdittrich92/docling-ocr-onnxtr)
-[![Pypi](https://img.shields.io/badge/pypi-v0.1.3-blue.svg)](https://pypi.org/project/docling-ocr-onnxtr/)
+[![Pypi](https://img.shields.io/badge/pypi-v0.2.0-blue.svg)](https://pypi.org/project/docling-ocr-onnxtr/)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/docling-ocr-onnxtr)
 
 The `docling-OCR-OnnxTR` repository provides a plugin that integrates the [OnnxTR OCR engine](https://github.com/felixdittrich92/OnnxTR) into the [Docling framework](https://github.com/docling-project/docling), enhancing document processing capabilities with efficient and accurate text recognition.
@@ -75,6 +75,60 @@ def main():
         det_arch="db_mobilenet_v3_large",
         # Text recognition model - from Hugging Face Hub
         reco_arch="Felix92/onnxtr-parseq-multilingual-v1",
+        # This can be set to `True` to auto-correct the orientation of the pages
+        auto_correct_orientation=False,
+    )
+
+    pipeline_options = PdfPipelineOptions(
+        ocr_options=ocr_options,
+    )
+    pipeline_options.allow_external_plugins = True  # <-- enabled the external plugins
+
+    # Convert the document
+    converter = DocumentConverter(
+        format_options={
+            InputFormat.PDF: PdfFormatOption(
+                pipeline_options=pipeline_options,
+            ),
+        },
+    )
+
+    conversion_result: ConversionResult = converter.convert(source=source)
+    doc = conversion_result.document
+    md = doc.export_to_markdown()
+    print(md)
+
+
+if __name__ == "__main__":
+    main()
+```
+
+It is also possible to load the models from local files instead of using the Hugging Face Hub or downloading them from the repo:
+
+```python
+from docling.datamodel.pipeline_options import PdfPipelineOptions
+from docling.document_converter import (
+    ConversionResult,
+    DocumentConverter,
+    InputFormat,
+    PdfFormatOption,
+)
+from docling_ocr_onnxtr import OnnxtrOcrOptions
+from onnxtr.models import db_mobilenet_v3_large, parseq
+
+
+def main():
+    # Source document to convert
+    source = "https://arxiv.org/pdf/2408.09869v4"
+
+    det_model = db_mobilenet_v3_large("/home/felix/.cache/onnxtr/models/db_mobilenet_v3_large-1866973f.onnx")
+    reco_model = parseq("/home/felix/.cache/onnxtr/models/parseq-00b40714.onnx")
+
+    ocr_options = OnnxtrOcrOptions(
+        # Text detection model
+        det_arch=det_model,
+        # Text recognition model
+        reco_arch=reco_model,
         # This can be set to `True` to auto-correct the orientation of the pages
         auto_correct_orientation=False,
     )
