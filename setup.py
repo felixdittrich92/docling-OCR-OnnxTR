@@ -9,7 +9,7 @@ from pathlib import Path
 from setuptools import setup
 
 PKG_NAME = "docling_ocr_onnxtr"
-VERSION = os.getenv("BUILD_VERSION", "0.1.3a0")
+VERSION = os.getenv("BUILD_VERSION", "0.2.0a0")
 
 
 if __name__ == "__main__":

@@ -22,9 +22,9 @@ class OnnxtrOcrOptions(OcrOptions):
     # detection model objectness score threshold 'fast algorithm'
     objectness_score: float = 0.3
 
-    # NOTE: This can be also a hf hub model
-    det_arch: str = "fast_base"
-    reco_arch: str = "crnn_vgg16_bn"
+    # NOTE: This can be also a hf hub model or an instance of a model class.
+    det_arch: Any = "fast_base"
+    reco_arch: Any = "crnn_vgg16_bn"
     reco_bs: int = 512
     auto_correct_orientation: bool = False
     preserve_aspect_ratio: bool = True
