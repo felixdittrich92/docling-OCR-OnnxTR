@@ -121,6 +121,8 @@ def main():
     # Source document to convert
     source = "https://arxiv.org/pdf/2408.09869v4"
 
+    # Load models from local files
+    # NOTE: You need to download the models first and then adjust the paths accordingly.
     det_model = db_mobilenet_v3_large("/home/felix/.cache/onnxtr/models/db_mobilenet_v3_large-1866973f.onnx")
     reco_model = parseq("/home/felix/.cache/onnxtr/models/parseq-00b40714.onnx")
 
