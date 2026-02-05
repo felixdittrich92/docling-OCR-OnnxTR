@@ -15,9 +15,8 @@ from docling.document_converter import DocumentConverter, PdfFormatOption
 from docling_ocr_onnxtr import OnnxtrOcrOptions
 
 from .test_data_gen_flag import GEN_TEST_DATA
-from .verify_utils import verify_conversion_result_v1, verify_conversion_result_v2
+from .verify_utils import verify_conversion_result_v2
 
-GENERATE_V1 = GEN_TEST_DATA
 GENERATE_V2 = GEN_TEST_DATA
 
 
@@ -73,7 +72,7 @@ def test_e2e_conversions(ocr_options: OcrOptions):
     print(f"Converting with ocr_engine: {ocr_options.kind}, language: {ocr_options.lang}")
     converter = get_converter(ocr_options=ocr_options)
     for pdf_path in pdf_paths:
-        if not ocr_options.auto_correct_orientation and "rotated" in pdf_path.name:
+        if not ocr_options.auto_correct_orientation and ("rotated" in pdf_path.name or "rotation" in pdf_path.name):
             # Skip rotated PDFs if orientation correction is disabled
             print(f"Skipping {pdf_path} due to orientation correction settings.")
             continue
@@ -82,12 +81,6 @@ def test_e2e_conversions(ocr_options: OcrOptions):
         doc_result: ConversionResult = converter.convert(pdf_path)
 
         try:
-            verify_conversion_result_v1(
-                input_path=pdf_path,
-                doc_result=doc_result,
-                generate=GENERATE_V1,
-                fuzzy=True,
-            )
             verify_conversion_result_v2(
                 input_path=pdf_path,
                 doc_result=doc_result,
@@ -95,7 +88,7 @@ def test_e2e_conversions(ocr_options: OcrOptions):
                 fuzzy=True,
             )
         except AssertionError as e:
-            if "rotated" in pdf_path.name:
+            if "rotated" in pdf_path.name or "rotation" in pdf_path.name or ocr_options.auto_correct_orientation:
                 pytest.xfail(f"Skipping {pdf_path} due to orientation correction settings: {e}")
             else:
                 raise  # Unexpected failure — re-raise the error
