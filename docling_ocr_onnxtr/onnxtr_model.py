@@ -7,6 +7,7 @@ import logging
 import os
 from collections.abc import Iterable
 from pathlib import Path
+from typing import Any
 
 import numpy
 import numpy as np
@@ -66,6 +67,10 @@ class OnnxtrOcrModel(BaseOcrModel):
                     "Alternatively, Docling has support for other OCR engines. See the documentation."
                 )
 
+            # NOTE: Annotated as `dict[str, Any]` because mypy validates a `**` splat
+            # against every parameter of `ocr_predictor` that is not filled positionally
+            # (e.g. `ignore_regions: list[str] | None`), which a `dict[str, bool]` fails.
+            config: dict[str, Any]
             if options.auto_correct_orientation:
                 config = {
                     "assume_straight_pages": False,
@@ -115,23 +120,29 @@ class OnnxtrOcrModel(BaseOcrModel):
         self,
         geom: tuple[tuple[float, float], tuple[float, float]] | np.ndarray,
         img_shape: tuple[int, int],
-    ) -> tuple[int, int, int, int]:
+        offset: tuple[float, float] = (0.0, 0.0),
+    ) -> tuple[float, float, float, float]:
         """
         Convert a bounding box or polygon from relative to absolute coordinates and return in [x1, y1, x2, y2] format.
 
         Args:
             geom: Either [[xmin, ymin], [xmax, ymax]] or [[x1, y1], ..., [x4, y4]]
             img_shape: (height, width) of the image
+            offset: (left, top) of the OCR rect the image was cropped from, in page coordinates
 
         Returns:
             top-left and bottom-right coordinates in absolute format (x1, y1, x2, y2)
         """
         h, w = img_shape
+        off_x, off_y = offset
         scale_inv = 1 / self.scale  # Precompute inverse for efficiency
 
-        def scale_point(x: float, y: float) -> tuple[int, int]:
-            """Scale and round a point to absolute coordinates."""
-            return int(round(x * w * scale_inv)), int(round(y * h * scale_inv))
+        def scale_point(x: float, y: float) -> tuple[float, float]:
+            """Scale a crop-relative point to absolute page coordinates."""
+            # NOTE: `geom` is relative to the cropped OCR rect, so the rect's top-left
+            # corner has to be added to land in page coordinates. Without this every
+            # OCR mode that crops sub-regions (all but FULL_PAGE) is shifted to (0, 0).
+            return x * w * scale_inv + off_x, y * h * scale_inv + off_y
 
         if len(geom) == 2:
             (xmin, ymin), (xmax, ymax) = geom
@@ -189,6 +200,7 @@ class OnnxtrOcrModel(BaseOcrModel):
                                                     self._to_absolute_docling_format(
                                                         word.geometry,
                                                         img_shape=(im_height, im_width),
+                                                        offset=(ocr_rect.l, ocr_rect.t),
                                                     ),
                                                     origin=CoordOrigin.TOPLEFT,
                                                 )

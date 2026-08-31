@@ -14,18 +14,31 @@ from docling.document_converter import DocumentConverter, PdfFormatOption
 
 from docling_ocr_onnxtr import OnnxtrOcrOptions
 
+from .groundtruth_paths import get_regular_groundtruth_paths, resolve_gt_ocr_mode
 from .test_data_gen_flag import GEN_TEST_DATA
 from .verify_utils import verify_conversion_result_v2
 
 GENERATE_V2 = GEN_TEST_DATA
 
+# Docling stores its OCR ground truth per engine and per OCR mode and has no entry for
+# external plugins, so we compare against a built-in engine (`fuzzy=True` absorbs the
+# engine differences). `tesseract` is used because it has the widest document coverage.
+REFERENCE_OCR_ENGINE = "tesseract"
+
 
 def get_pdf_paths():
     # Define the directory you want to search
-    directory = Path("./tests/data_scanned")
+    directory = Path("./tests/data/ocr/sources")
     # List all PDF files in the directory and its subdirectories
     pdf_files = sorted(directory.rglob("*.pdf"))
     return pdf_files
+
+
+def get_groundtruth_paths(pdf_path: Path, ocr_options: OcrOptions):
+    # Ground truth lives in `<data>/groundtruth/<engine>/<ocr_mode>/<doc>.<engine>.<ocr_mode>.*`
+    mode = resolve_gt_ocr_mode(ocr_options.mode)
+    gt_dir = pdf_path.parent.parent / "groundtruth" / REFERENCE_OCR_ENGINE / mode.value
+    return get_regular_groundtruth_paths(pdf_path, gt_dir=gt_dir, tag=f"{REFERENCE_OCR_ENGINE}.{mode.value}")
 
 
 def get_converter(ocr_options: OcrOptions):
@@ -77,12 +90,18 @@ def test_e2e_conversions(ocr_options: OcrOptions):
             print(f"Skipping {pdf_path} due to orientation correction settings.")
             continue
 
+        gt_paths = get_groundtruth_paths(pdf_path, ocr_options)
+        if not GENERATE_V2 and not gt_paths.doc_json.exists():
+            # Docling does not ship reference ground truth for every document / OCR mode
+            print(f"Skipping {pdf_path}: no {REFERENCE_OCR_ENGINE} ground truth for mode {ocr_options.mode.value}.")
+            continue
+
         print(f"converting {pdf_path}")
         doc_result: ConversionResult = converter.convert(pdf_path)
 
         try:
             verify_conversion_result_v2(
-                input_path=pdf_path,
+                gt=gt_paths,
                 doc_result=doc_result,
                 generate=GENERATE_V2,
                 fuzzy=True,

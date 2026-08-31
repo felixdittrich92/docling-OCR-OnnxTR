@@ -144,6 +144,8 @@ wandb/
 
 # Docling debug files
 debug/
-tests/data_scanned/
+tests/data/
+tests/data_scanned
 tests/verify_utils.py
+tests/groundtruth_paths.py
 tests/test_data_gen_flag.py
