@@ -106,6 +106,7 @@ class OnnxtrOcrModel(BaseOcrModel):
                     else self.options.reco_arch
                 ),
                 det_bs=1,  # NOTE: Should be always 1, because docling handles batching
+                reco_bs=self.options.reco_bs,
                 preserve_aspect_ratio=self.options.preserve_aspect_ratio,
                 symmetric_pad=self.options.symmetric_pad,
                 paragraph_break=self.options.paragraph_break,

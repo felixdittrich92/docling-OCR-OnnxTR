@@ -123,3 +123,17 @@ def test_call_skips_invalid_page():
     result = list(model(conv_res, [invalid_page]))
 
     assert result == [invalid_page]
+
+
+@patch("onnxtr.models.ocr_predictor")
+@patch("onnxtr.models.from_hub", side_effect=lambda x: x)
+@patch("onnxtr.models.EngineConfig")
+def test_reco_bs_is_passed_to_the_predictor(mock_engine_config, mock_from_hub, mock_ocr_predictor):
+    OnnxtrOcrModel(
+        enabled=True,
+        artifacts_path=None,
+        options=OnnxtrOcrOptions(det_arch="det", reco_arch="reco", reco_bs=128),
+        accelerator_options=AcceleratorOptions(),
+    )
+
+    assert mock_ocr_predictor.call_args.kwargs["reco_bs"] == 128
