@@ -81,7 +81,7 @@ dev = [
 ]
 
 [project.urls]
-repository = "https://github.com/felixdittrich92/docling-OCR-OnnxTR/OnnxTR"
+repository = "https://github.com/felixdittrich92/docling-OCR-OnnxTR"
 tracker = "https://github.com/felixdittrich92/docling-OCR-OnnxTR/issues"
 changelog = "https://github.com/felixdittrich92/docling-OCR-OnnxTR/releases"
 
